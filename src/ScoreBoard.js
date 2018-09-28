@@ -20,7 +20,7 @@ const renderFrames = frameScores => {
 };
 
 const renderFrame = (index, frameScore) => (
-  <Frame key={index} score={frameScore ? frameScore : ""} />
+  <Frame key={index} rolls={[5, 4]} score={frameScore ? frameScore : ""} />
 );
 
 export default ScoreBoard;
