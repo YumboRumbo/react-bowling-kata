@@ -5,7 +5,7 @@ const ScoreBoard = ({ frameScores, ...rest }) => {
   return (
     <div className="scoreboard">
       <div className="frames">{renderFrames(frameScores)}</div>
-      <h1>Game Score = 133</h1>
+      <h1 id="gameScore">Game Score = {calculateGameScore(frameScores)}</h1>
     </div>
   );
 };
@@ -22,5 +22,18 @@ const renderFrames = frameScores => {
 const renderFrame = (index, frameScore) => (
   <Frame key={index} rolls={[5, 4]} score={frameScore ? frameScore : ""} />
 );
+
+// TODO: Add bowling score calculation
+const calculateGameScore = frameScores => {
+  let gameScore = 0;
+  frameScores.forEach(function(element) {
+    if (typeof element == 'object') {
+      gameScore += calculateGameScore(element);
+    } else { 
+      gameScore += element;
+    }
+  });
+  return gameScore;
+}
 
 export default ScoreBoard;

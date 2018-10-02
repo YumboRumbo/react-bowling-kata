@@ -26,3 +26,27 @@ it("should render beginning of the game", () => {
     expect(frame.props().score).toEqual("");
   });
 });
+
+it("should correctly display an empty game score", () => {
+  const props = {
+    currentFrame: 1,
+    frameScores: []
+  };
+
+  const wrapper = shallow(<ScoreBoard {...props} />);
+  const gameScore = wrapper.find('#gameScore').props().children[1];
+
+  expect(gameScore).toEqual(0);
+});
+
+it("should display a game score", () => {
+  const props = {
+    currentFrame: 4,
+    frameScores: [[5,5], [3,4], [1,2]]
+  };
+
+  const wrapper = shallow(<ScoreBoard {...props} />);
+  const gameScore = wrapper.find('#gameScore').props().children[1];
+
+  expect(gameScore).toEqual(20);
+});
