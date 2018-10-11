@@ -1,10 +1,15 @@
 import React from "react";
+import { get } from 'lodash';
 
-const Frame = ({ rolls }) => {
+const Frame = (props) => {
+  const firstRoll = get(props, 'rolls[0]', '');
+  const secondRoll = get(props, 'rolls[1]', '');
+  const rolls = get(props, 'rolls', []);
+
   return (
     <div className="frame">
-      <span id="firstRoll">{getRollScore(rolls[0])}</span>
-      <span id="secondRoll">{getRollScore(rolls[1])}</span>
+      <span id="firstRoll">{firstRoll}</span>
+      <span id="secondRoll">{secondRoll}</span>
       <p id="totalScore">{getTotalScore(rolls)}</p>
     </div>
   );

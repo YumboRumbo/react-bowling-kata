@@ -40,3 +40,14 @@ it('should display blank total score if one roll is empty', () => {
   expect(secondRoll).toEqual('');
   expect(totalScore).toEqual('');
 });
+
+it('should display blank if rolls array is undefined', () => {
+  const wrapper = shallow(<Frame />);
+  const firstRoll = wrapper.find('#firstRoll').props().children;
+  const secondRoll = wrapper.find('#secondRoll').props().children;
+  const totalScore = wrapper.find('#totalScore').props().children;
+
+  expect(firstRoll).toEqual('');
+  expect(secondRoll).toEqual('');
+  expect(totalScore).toEqual('');
+});

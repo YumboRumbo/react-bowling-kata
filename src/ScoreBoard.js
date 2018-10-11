@@ -20,16 +20,16 @@ const renderFrames = frameScores => {
 };
 
 const renderFrame = (index, frameScore) => (
-  <Frame key={index} rolls={[5, 4]} score={frameScore ? frameScore : ""} />
+  <Frame key={index} rolls={frameScore} score={frameScore ? frameScore : ""} />
 );
 
 // TODO: Add bowling score calculation
 const calculateGameScore = frameScores => {
   let gameScore = 0;
   frameScores.forEach(function(element) {
-    if (typeof element == 'object') {
+    if (typeof element === 'object') {
       gameScore += calculateGameScore(element);
-    } else { 
+    } else {
       gameScore += element;
     }
   });
