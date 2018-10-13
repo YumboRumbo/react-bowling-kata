@@ -15,8 +15,6 @@ const Frame = (props) => {
   );
 };
 
-const getRollScore = number => number === undefined ? '' : number;
-
 const getTotalScore = rolls => isOneOfRollsMissing(rolls) ? '' : rolls[0] + rolls[1];
 
 const isOneOfRollsMissing = rolls => rolls[0] === undefined || rolls[1] === undefined;

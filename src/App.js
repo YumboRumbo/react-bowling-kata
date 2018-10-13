@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import ScoreBoard from "./ScoreBoard";
-import RollButtons from "./RollButtons";
+import ScoreBoard from "./ScoreBoard/ScoreBoard";
+import RollButtons from "./RollButtons/RollButtons";
 
 const defaultProps = {
   currentFrame: 1,

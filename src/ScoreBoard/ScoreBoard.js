@@ -1,5 +1,5 @@
 import React from "react";
-import Frame from "./Frame";
+import Frame from "../Frame/Frame";
 
 const ScoreBoard = ({ frameScores, ...rest }) => {
   return (

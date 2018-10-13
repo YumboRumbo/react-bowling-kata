@@ -1,5 +1,5 @@
 import React from 'react';
-import Roll from './Roll';
+import Roll from '../Roll/Roll';
 
 const RollButtons = () =>  {
   return (<div className="rolls">
