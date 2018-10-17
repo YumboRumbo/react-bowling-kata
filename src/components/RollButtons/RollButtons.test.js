@@ -1,6 +1,6 @@
 import React from 'react';
 import RollButtons from './RollButtons';
-import Roll from '../Roll/Roll';
+import Roll from '../../containers/Roll/Roll';
 import { shallow } from 'enzyme';
 
 it('should render 11 Roll components', () => {
