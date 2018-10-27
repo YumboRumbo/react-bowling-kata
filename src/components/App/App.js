@@ -9,6 +9,10 @@ const defaultProps = {
   frameScores: []
 };
 
+const handleClick = number => {
+  console.log(number);
+};
+
 class App extends Component {
   render() {
     return (
@@ -17,7 +21,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React Bowling</h2>
         </div>
-        <RollButtons />
+        <RollButtons handleClick={handleClick} />
         <ScoreBoard {...defaultProps} />
       </div>
     );

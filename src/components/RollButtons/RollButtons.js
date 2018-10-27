@@ -1,19 +1,19 @@
 import React from 'react';
 import Roll from '../../containers/Roll/Roll';
 
-const RollButtons = () =>  {
+const RollButtons = ({ handleClick }) =>  {
   return (<div className="rolls">
-    <Roll number={0} />
-    <Roll number={1} />
-    <Roll number={2} />
-    <Roll number={3} />
-    <Roll number={4} />
-    <Roll number={5} />
-    <Roll number={6} />
-    <Roll number={7} />
-    <Roll number={8} />
-    <Roll number={9} />
-    <Roll number={10} />
+    <Roll number={0} handleClick={handleClick}/>
+    <Roll number={1} handleClick={handleClick}/>
+    <Roll number={2} handleClick={handleClick}/>
+    <Roll number={3} handleClick={handleClick}/>
+    <Roll number={4} handleClick={handleClick}/>
+    <Roll number={5} handleClick={handleClick}/>
+    <Roll number={6} handleClick={handleClick}/>
+    <Roll number={7} handleClick={handleClick}/>
+    <Roll number={8} handleClick={handleClick}/>
+    <Roll number={9} handleClick={handleClick}/>
+    <Roll number={10} handleClick={handleClick}/>
   </div>);
 };
 

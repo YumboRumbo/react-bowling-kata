@@ -11,3 +11,17 @@ it('should display number on button', () => {
   expect(button.props().children).toEqual(number);
 });
 
+it('should handle click event', () => {
+  const props = {
+    number: 9,
+    handleClick: jest.fn()
+  }
+
+  const wrapper = shallow(<Roll {...props} />);
+  const button = wrapper.find('button');
+
+  button.simulate('click')
+
+  expect(props.handleClick).toHaveBeenCalledWith(props.number)
+})
+
