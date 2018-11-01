@@ -4,9 +4,10 @@ import "./App.css";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import RollButtons from "../RollButtons/RollButtons";
 
-const defaultProps = {
+const initialState = {
   currentFrame: 1,
-  frameScores: []
+  frameScores: [[]],
+  totalScore: 0
 };
 
 const handleClick = number => {
@@ -22,7 +23,7 @@ class App extends Component {
           <h2>Welcome to React Bowling</h2>
         </div>
         <RollButtons handleClick={handleClick} />
-        <ScoreBoard {...defaultProps} />
+        <ScoreBoard {...initialState} />
       </div>
     );
   }

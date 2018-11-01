@@ -3,50 +3,44 @@ import ScoreBoard from "./ScoreBoard";
 import Frame from "../Frame/Frame";
 import { shallow } from "enzyme";
 
-it("should render ten Frame components", () => {
-  const props = {
-    currentFrame: 1,
-    frameScores: []
-  };
+const initialState = {
+  currentFrame: 1,
+  frameScores: [[]],
+  totalScore: 0
+};
 
-  var wrapper = shallow(<ScoreBoard {...props} />);
+it("should render ten Frame components", () => {
+  var wrapper = shallow(<ScoreBoard {...initialState} />);
   expect(wrapper.find(Frame).length).toEqual(10);
 });
 
 it("should render beginning of the game", () => {
-  const props = {
-    currentFrame: 1,
-    frameScores: []
-  };
-
-  const wrapper = shallow(<ScoreBoard {...props} />);
+  const wrapper = shallow(<ScoreBoard {...initialState} />);
   const frames = wrapper.find(Frame);
-  
-  frames.map(frame => {
-    expect(frame.props().score).toEqual("");
-  });
+  const firstFrame = frames.first();
+
+  expect(firstFrame.props().rolls).toEqual([]);
+  for (var index = 1; index < 10; index++) {
+    expect(frames.at(index).props().rolls).toEqual(undefined);
+  }
 });
 
 it("should correctly display an empty game score", () => {
-  const props = {
-    currentFrame: 1,
-    frameScores: []
-  };
-
-  const wrapper = shallow(<ScoreBoard {...props} />);
+  const wrapper = shallow(<ScoreBoard {...initialState} />);
   const gameScore = wrapper.find('#gameScore').props().children[1];
 
   expect(gameScore).toEqual(0);
 });
 
 it("should display a game score", () => {
-  const props = {
+  const state = {
     currentFrame: 4,
-    frameScores: [[5,5], [3,4], [1,2]]
+    frameScores: [[5,2], [3,4], [1,2], []],
+    totalScore: 17
   };
 
-  const wrapper = shallow(<ScoreBoard {...props} />);
+  const wrapper = shallow(<ScoreBoard {...state} />);
   const gameScore = wrapper.find('#gameScore').props().children[1];
 
-  expect(gameScore).toEqual(20);
+  expect(gameScore).toEqual(17);
 });

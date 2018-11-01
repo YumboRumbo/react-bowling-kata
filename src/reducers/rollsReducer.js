@@ -1,5 +1,3 @@
-import iassign from 'immutable-assign';
-
 const initialState = {
   currentFrame: 1,
   frameScores: [[]],
