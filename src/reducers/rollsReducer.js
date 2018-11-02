@@ -32,15 +32,26 @@ const addScore = (state, score) => {
 const calculateTotalScore = frameScores => {
   var totalScore = 0;
   for (var i = 0; i < frameScores.length; i++) {
-    if (frameScores[i] instanceof Array && !frameIsEmpty(frameScores[i])) {
-      totalScore += calculateTotalScore(frameScores[i]);
-    } else {
-      totalScore += frameScores[i];
+    if (isNonEmptyFrame(frameScores[i])) {
+      totalScore += getFrameSum(frameScores[i]);
+      if (frameIsSpare(frameScores[i])) {
+        if (isNonEmptyFrame(frameScores[i + 1])) {
+          totalScore += frameScores[i + 1][0];
+        }
+      }
     }
   }
   return totalScore;
 };
 
+const getFrameSum = frame => frame.reduce(add, 0);
+
+const add = (a, b) => a + b;
+
+const isNonEmptyFrame = frame => frame instanceof Array && !frameIsEmpty(frame);
+
 const frameIsEmpty = frame => frame.length === 0;
+
+const frameIsSpare = frame => frame.length === 2 && getFrameSum(frame) === 10;
 
 export default rollsReducer;
