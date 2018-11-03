@@ -62,19 +62,19 @@ describe('rollsReducer', () => {
   it('should handle spares', () => {
     const currentState = {
       currentFrame: 2,
-      frameScores: [[9, 1], [5]],
-      totalScore: 10
+      frameScores: [[8, 2], [5]],
+      totalScore: 15
     };
     const action = {
       type: 'ADD_SCORE',
       payload: {
-        score: 3
+        score: 4
       }
     };
     const expectedState = {
       currentFrame: 3,
-      frameScores: [[9, 1], [5, 3], []],
-      totalScore: 23
+      frameScores: [[8, 2], [5, 4], []],
+      totalScore: 24
     };
 
     const actualState = rollsReducer(currentState, action);
@@ -82,11 +82,11 @@ describe('rollsReducer', () => {
     expect(actualState).toEqual(expectedState);
   });
 
-  it('should handle strikes',() => {
+  it('should handle strikes', () => {
     const currentState = {
       currentFrame: 6,
       frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5]],
-      totalScore: 63
+      totalScore: 78
     };
     const action = {
       type: 'ADD_SCORE',
