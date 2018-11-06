@@ -5,7 +5,8 @@ describe('rollsReducer', () => {
     const expectedState = {
       currentFrame: 1,
       frameScores: [[]],
-      totalScore: 0
+      totalScore: 0,
+      gameOver: false
     }
 
     const actualState = rollsReducer(undefined, {});
@@ -17,7 +18,8 @@ describe('rollsReducer', () => {
     const currentState = {
       currentFrame: 1,
       frameScores: [[]],
-      totalScore: 0
+      totalScore: 0,
+      gameOver: false
     };
     const action = {
       type: 'ADD_SCORE',
@@ -28,7 +30,8 @@ describe('rollsReducer', () => {
     const expectedState = {
       currentFrame: 1,
       frameScores: [[5]],
-      totalScore: 5
+      totalScore: 5,
+      gameOver: false
     };
 
     const actualState = rollsReducer(currentState, action);
@@ -40,7 +43,8 @@ describe('rollsReducer', () => {
     const currentState = {
       currentFrame: 1,
       frameScores: [[5]],
-      totalScore: 5
+      totalScore: 5,
+      gameOver: false
     };
     const action = {
       type: 'ADD_SCORE',
@@ -51,7 +55,8 @@ describe('rollsReducer', () => {
     const expectedState = {
       currentFrame: 2,
       frameScores: [[5, 3], []],
-      totalScore: 8
+      totalScore: 8,
+      gameOver: false
     };
     
     const actualState = rollsReducer(currentState, action);
@@ -63,7 +68,8 @@ describe('rollsReducer', () => {
     const currentState = {
       currentFrame: 2,
       frameScores: [[8, 2], [5]],
-      totalScore: 15
+      totalScore: 15,
+      gameOver: false
     };
     const action = {
       type: 'ADD_SCORE',
@@ -74,7 +80,8 @@ describe('rollsReducer', () => {
     const expectedState = {
       currentFrame: 3,
       frameScores: [[8, 2], [5, 4], []],
-      totalScore: 24
+      totalScore: 24,
+      gameOver: false
     };
 
     const actualState = rollsReducer(currentState, action);
@@ -86,7 +93,8 @@ describe('rollsReducer', () => {
     const currentState = {
       currentFrame: 6,
       frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5]],
-      totalScore: 78
+      totalScore: 78,
+      gameOver: false
     };
     const action = {
       type: 'ADD_SCORE',
@@ -97,7 +105,33 @@ describe('rollsReducer', () => {
     const expectedState = {
       currentFrame: 7,
       frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5, 5], []],
-      totalScore: 88
+      totalScore: 88,
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
+
+  it('should handle the last frame', () => {
+    const currentState = {
+      currentFrame: 10,
+      frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5, 5], [5, 3], [6, 3], [9, 1], [9, 1]],
+      totalScore: 139,
+      gameOver: false
+    };
+    const action = {
+      type: 'ADD_SCORE',
+      payload: {
+        score: 10
+      }
+    };
+    const expectedState = {
+      currentFrame: 10,
+      frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5, 5], [5, 3], [6, 3], [9, 1], [9, 1, 10]],
+      totalScore: 149,
+      gameOver: true
     };
 
     const actualState = rollsReducer(currentState, action);

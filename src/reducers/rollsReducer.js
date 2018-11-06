@@ -1,7 +1,8 @@
 const initialState = {
   currentFrame: 1,
   frameScores: [[]],
-  totalScore: 0
+  totalScore: 0,
+  gameOver: false
 };
 
 const rollsReducer = (state = initialState, action) => {
@@ -16,7 +17,21 @@ const rollsReducer = (state = initialState, action) => {
 const addScore = (state, score) => {
   var newState = Object.assign({}, state);
   const frameIndex = newState.currentFrame - 1;
-  if (frameIsEmpty(newState.frameScores[frameIndex])) {
+  if (onLastFrame(frameIndex)) {
+    if (frameIsEmpty(newState.frameScores[frameIndex])) {
+      newState.frameScores[frameIndex].push(score);
+    } else {
+      if (newState.frameScores[frameIndex].length === 1) {
+        newState.frameScores[frameIndex].push(score);
+        if (getFrameSum(newState.frameScores[frameIndex]) != 10) {
+          newState.gameOver = true;
+        }
+      } else if (newState.frameScores[frameIndex].length === 2) {
+        newState.frameScores[frameIndex].push(score);
+        newState.gameOver = true;
+      }
+    }
+  } else if (frameIsEmpty(newState.frameScores[frameIndex])) {
     newState.frameScores[frameIndex].push(score);
   } else {
     newState.frameScores[newState.currentFrame - 1].push(score);
@@ -26,6 +41,8 @@ const addScore = (state, score) => {
   newState.totalScore = parseInt(calculateTotalScore(newState.frameScores), 10);
   return newState;
 };
+
+const onLastFrame = frameIndex => frameIndex === 9;
 
 const calculateTotalScore = frameScores => {
   var totalScore = 0;

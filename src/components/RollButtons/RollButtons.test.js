@@ -19,4 +19,6 @@ it('should pass handleClick method to Roll components', () => {
   const rolls = wrapper.find(Roll);
   
   expect(rolls.first().props().handleClick).toEqual(handleClick);
-})
+});
+
+// TODO: Write test: "IF gameOver == true, THEN disable all buttons."

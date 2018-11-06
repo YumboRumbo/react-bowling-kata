@@ -7,7 +7,8 @@ import RollButtons from "../RollButtons/RollButtons";
 const initialState = {
   currentFrame: 1,
   frameScores: [[]],
-  totalScore: 0
+  totalScore: 0,
+  gameOver: false
 };
 
 const handleClick = number => {
