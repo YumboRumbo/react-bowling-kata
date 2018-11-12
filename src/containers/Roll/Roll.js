@@ -1,10 +1,10 @@
 import React from "react";
 
-const Roll = ({ number, handleClick }) => {
+const Roll = ({ number, handleRoll }) => {
   return (
     <button 
       type="button"
-      onClick={() => handleClick(number)}
+      onClick={() => handleRoll(number)}
     >
       {number}
     </button>

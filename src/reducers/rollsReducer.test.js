@@ -68,7 +68,7 @@ describe('rollsReducer', () => {
     const currentState = {
       currentFrame: 2,
       frameScores: [[8, 2], [5]],
-      totalScore: 15,
+      totalScore: 20,
       gameOver: false
     };
     const action = {
@@ -131,6 +131,31 @@ describe('rollsReducer', () => {
       currentFrame: 10,
       frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5, 5], [5, 3], [6, 3], [9, 1], [9, 1, 10]],
       totalScore: 149,
+      gameOver: true
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
+
+  it('should handle perfect 300 game', () => {
+    const currentState = {
+      currentFrame: 10,
+      frameScores: [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10]],
+      totalScore: 290,
+      gameOver: false
+    };
+    const action = {
+      type: 'ADD_SCORE',
+      payload: {
+        score: 10
+      }
+    };
+    const expectedState = {
+      currentFrame: 10,
+      frameScores: [[10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]],
+      totalScore: 300,
       gameOver: true
     };
 

@@ -1,7 +1,9 @@
 import React from "react";
 import Frame from "../Frame/Frame";
 
-const ScoreBoard = ({currentFrame, frameScores, totalScore}) => {
+const ScoreBoard = (props) => {
+  console.log('props for ScoreBoard', props)
+  const {currentFrame, frameScores, totalScore} = props
   return (
     <div className="scoreboard">
       <div className="frames">{renderFrames(frameScores)}</div>

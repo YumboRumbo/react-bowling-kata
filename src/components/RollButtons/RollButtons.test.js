@@ -4,21 +4,21 @@ import Roll from '../../containers/Roll/Roll';
 import { shallow } from 'enzyme';
 
 it('should render 11 Roll components', () => {
-  const handleClick = jest.fn();
+  const handleRoll = jest.fn();
 
-  const wrapper = shallow(<RollButtons handleClick={handleClick}/>);
+  const wrapper = shallow(<RollButtons handleRoll={handleRoll}/>);
   const rolls = wrapper.find(Roll);
   
   expect(rolls.length).toEqual(11);
 });
 
-it('should pass handleClick method to Roll components', () => {
-  const handleClick = jest.fn()
+it('should pass handleRoll method to Roll components', () => {
+  const handleRoll = jest.fn()
 
-  const wrapper = shallow(<RollButtons handleClick={handleClick} />)
+  const wrapper = shallow(<RollButtons handleRoll={handleRoll} />)
   const rolls = wrapper.find(Roll);
   
-  expect(rolls.first().props().handleClick).toEqual(handleClick);
+  expect(rolls.first().props().handleRoll).toEqual(handleRoll);
 });
 
 // TODO: Write test: "IF gameOver == true, THEN disable all buttons."

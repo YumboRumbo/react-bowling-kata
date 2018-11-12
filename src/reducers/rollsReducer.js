@@ -23,7 +23,7 @@ const addScore = (state, score) => {
     } else {
       if (newState.frameScores[frameIndex].length === 1) {
         newState.frameScores[frameIndex].push(score);
-        if (getFrameSum(newState.frameScores[frameIndex]) != 10) {
+        if (getFrameSum(newState.frameScores[frameIndex]) !== 10) {
           newState.gameOver = true;
         }
       } else if (newState.frameScores[frameIndex].length === 2) {

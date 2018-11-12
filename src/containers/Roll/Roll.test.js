@@ -14,7 +14,7 @@ it('should display number on button', () => {
 it('should handle click event', () => {
   const props = {
     number: 9,
-    handleClick: jest.fn()
+    handleRoll: jest.fn()
   }
 
   const wrapper = shallow(<Roll {...props} />);
@@ -22,6 +22,6 @@ it('should handle click event', () => {
 
   button.simulate('click')
 
-  expect(props.handleClick).toHaveBeenCalledWith(props.number)
+  expect(props.handleRoll).toHaveBeenCalledWith(props.number)
 })
 
