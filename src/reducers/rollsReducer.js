@@ -18,7 +18,7 @@ const addScore = (state, score) => {
   var newState = Object.assign({}, state);
   const frameIndex = newState.currentFrame - 1;
   if (onLastFrame(frameIndex)) {
-    handleLastFrameLogic(newState, frameIndex, score);
+    handleLastFrame(newState, frameIndex, score);
   } else if (frameIsEmpty(newState.frameScores[frameIndex])) {
     newState.frameScores[frameIndex].push(score);
   } else {
@@ -30,37 +30,23 @@ const addScore = (state, score) => {
 
 const calculateTotalScore = frameScores => {
   var totalScore = 0;
-  for (var i = 0; i < frameScores.length; i++) {
-    const frame = frameScores[i];
-    if (isNonEmptyFrame(frame)) {
-      totalScore += getFrameSum(frame);
-      if (frameIsStrike(frame)) {
-        if (onSecondToLastFrame(i)) {
-          if (isNonEmptyFrame(frameScores[i + 1])) {
-            if (frameScores[i + 1].length === 1) {
-              totalScore += frameScores[i + 1][0];
-            } else if (frameScores[i + 1].length >= 2) {
-              totalScore += (frameScores[i + 1][0] + frameScores[i + 1][1]);
-            }
-          }
-        } else {
-          totalScore += getFrameStrikeScore(frameScores[i + 1], frameScores[i + 2]);
-        }
-      } else if (frameIsSpare(frame)) {
-        totalScore += getFrameSpareScore(frameScores[i + 1]);
-      }
+  for (var frameIndex = 0; frameIndex < frameScores.length; frameIndex++) {
+    const currentFrame = frameScores[frameIndex];
+    if (isNonEmptyFrame(currentFrame)) {
+      totalScore += calculateFrameScore(currentFrame, frameScores, frameIndex);
     }
   }
   return totalScore;
 };
 
-// ----- 'addScore' private methods -----
+// ----- 'addScore' HELPER FUNCTIONS -----
 const completeFrame = (newState, frameIndex, score) => {
   newState.frameScores[frameIndex].push(score);
   newState.frameScores.push([]);
   newState.currentFrame++;
 };
-const handleLastFrameLogic = (newState, frameIndex, score) => {
+
+const handleLastFrame = (newState, frameIndex, score) => {
   if (frameIsEmpty(newState.frameScores[frameIndex])) {
     newState.frameScores[frameIndex].push(score);
   } else {
@@ -75,10 +61,35 @@ const handleLastFrameLogic = (newState, frameIndex, score) => {
     }
   }
 };
+// ----- END -----
 
-const onLastFrame = frameIndex => frameIndex === 9;
+// ----- 'calculateTotalScore' HELPER FUNCTIONS
+const calculateFrameScore = (currentFrame, frameScores, frameIndex) => {
+  var frameScore = 0;
+  frameScore += getFrameSum(currentFrame);
+  if (frameIsStrike(currentFrame)) {
+    frameScore += handleStrike(frameIndex, frameScores);
+  } else if (frameIsSpare(currentFrame)) {
+    frameScore += getFrameSpareScore(frameScores[frameIndex + 1]);
+  }
+  return frameScore;
+};
 
-const onSecondToLastFrame = frameIndex => frameIndex === 8;
+const handleStrike = (frameIndex, frameScores) => {
+  var strikeBonusScore = 0;
+  if (onSecondToLastFrame(frameIndex)) {
+    if (isNonEmptyFrame(frameScores[frameIndex + 1])) {
+      if (frameScores[frameIndex + 1].length === 1) {
+        strikeBonusScore += frameScores[frameIndex + 1][0];
+      } else if (frameScores[frameIndex + 1].length >= 2) {
+        strikeBonusScore += (frameScores[frameIndex + 1][0] + frameScores[frameIndex + 1][1]);
+      }
+    }
+  } else {
+    strikeBonusScore += getFrameStrikeScore(frameScores[frameIndex + 1], frameScores[frameIndex + 2]);
+  }
+  return strikeBonusScore;
+};
 
 const getFrameSpareScore = nextFrame => {
   if (isNonEmptyFrame(nextFrame)) {
@@ -99,6 +110,12 @@ const getFrameStrikeScore = (firstNextFrame, secondNextFrame) => {
   }
   return 0;
 }
+// ----- END -----
+
+// ----- HELPER FUNCTIONS -----
+const onLastFrame = frameIndex => frameIndex === 9;
+
+const onSecondToLastFrame = frameIndex => frameIndex === 8;
 
 const getFrameSum = frame => frame.reduce(add, 0);
 
@@ -113,5 +130,6 @@ const frameIsStrike = frame => frame.length === 1 && frame[0] === 10;
 const frameIsOpenOrSpare = frame => frame.length === 2;
 
 const add = (a, b) => a + b;
+// ----- END -----
 
 export default rollsReducer;
