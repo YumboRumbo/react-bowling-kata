@@ -18,33 +18,15 @@ const addScore = (state, score) => {
   var newState = Object.assign({}, state);
   const frameIndex = newState.currentFrame - 1;
   if (onLastFrame(frameIndex)) {
-    if (frameIsEmpty(newState.frameScores[frameIndex])) {
-      newState.frameScores[frameIndex].push(score);
-    } else {
-      if (newState.frameScores[frameIndex].length === 1) {
-        newState.frameScores[frameIndex].push(score);
-        if (getFrameSum(newState.frameScores[frameIndex]) !== 10) {
-          newState.gameOver = true;
-        }
-      } else if (newState.frameScores[frameIndex].length === 2) {
-        newState.frameScores[frameIndex].push(score);
-        newState.gameOver = true;
-      }
-    }
+    handleLastFrameLogic(newState, frameIndex, score);
   } else if (frameIsEmpty(newState.frameScores[frameIndex])) {
     newState.frameScores[frameIndex].push(score);
   } else {
-    newState.frameScores[newState.currentFrame - 1].push(score);
-    newState.frameScores.push([]);
-    newState.currentFrame++;
+    completeFrame(newState, frameIndex, score);
   }
   newState.totalScore = parseInt(calculateTotalScore(newState.frameScores), 10);
   return newState;
 };
-
-const onLastFrame = frameIndex => frameIndex === 9;
-
-const onSecondToLastFrame = frameIndex => frameIndex === 8;
 
 const calculateTotalScore = frameScores => {
   var totalScore = 0;
@@ -71,6 +53,32 @@ const calculateTotalScore = frameScores => {
   }
   return totalScore;
 };
+
+// ----- 'addScore' private methods -----
+const completeFrame = (newState, frameIndex, score) => {
+  newState.frameScores[frameIndex].push(score);
+  newState.frameScores.push([]);
+  newState.currentFrame++;
+};
+const handleLastFrameLogic = (newState, frameIndex, score) => {
+  if (frameIsEmpty(newState.frameScores[frameIndex])) {
+    newState.frameScores[frameIndex].push(score);
+  } else {
+    if (newState.frameScores[frameIndex].length === 1) {
+      newState.frameScores[frameIndex].push(score);
+      if (getFrameSum(newState.frameScores[frameIndex]) !== 10) {
+        newState.gameOver = true;
+      }
+    } else if (newState.frameScores[frameIndex].length === 2) {
+      newState.frameScores[frameIndex].push(score);
+      newState.gameOver = true;
+    }
+  }
+};
+
+const onLastFrame = frameIndex => frameIndex === 9;
+
+const onSecondToLastFrame = frameIndex => frameIndex === 8;
 
 const getFrameSpareScore = nextFrame => {
   if (isNonEmptyFrame(nextFrame)) {
