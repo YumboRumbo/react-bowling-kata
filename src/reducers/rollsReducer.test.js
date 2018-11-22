@@ -67,20 +67,20 @@ describe('rollsReducer', () => {
   it('should handle spares', () => {
     const currentState = {
       currentFrame: 2,
-      frameScores: [[8, 2], [5]],
-      totalScore: 20,
+      frameScores: [[8, 2], []],
+      totalScore: 10,
       gameOver: false
     };
     const action = {
       type: 'ADD_SCORE',
       payload: {
-        score: 4
+        score: 5
       }
     };
     const expectedState = {
-      currentFrame: 3,
-      frameScores: [[8, 2], [5, 4], []],
-      totalScore: 24,
+      currentFrame: 2,
+      frameScores: [[8, 2], [5]],
+      totalScore: 20,
       gameOver: false
     };
 

@@ -44,6 +44,8 @@ const addScore = (state, score) => {
 
 const onLastFrame = frameIndex => frameIndex === 9;
 
+const onSecondToLastFrame = frameIndex => frameIndex === 8;
+
 const calculateTotalScore = frameScores => {
   var totalScore = 0;
   for (var i = 0; i < frameScores.length; i++) {
@@ -51,7 +53,17 @@ const calculateTotalScore = frameScores => {
     if (isNonEmptyFrame(frame)) {
       totalScore += getFrameSum(frame);
       if (frameIsStrike(frame)) {
-        totalScore += getFrameStrikeScore(frameScores[i + 1], frameScores[i + 2]);
+        if (onSecondToLastFrame(i)) {
+          if (isNonEmptyFrame(frameScores[i + 1])) {
+            if (frameScores[i + 1].length === 1) {
+              totalScore += frameScores[i + 1][0];
+            } else if (frameScores[i + 1].length >= 2) {
+              totalScore += (frameScores[i + 1][0] + frameScores[i + 1][1]);
+            }
+          }
+        } else {
+          totalScore += getFrameStrikeScore(frameScores[i + 1], frameScores[i + 2]);
+        }
       } else if (frameIsSpare(frame)) {
         totalScore += getFrameSpareScore(frameScores[i + 1]);
       }
