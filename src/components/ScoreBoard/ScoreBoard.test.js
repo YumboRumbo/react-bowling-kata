@@ -44,3 +44,16 @@ it("should display a game score", () => {
 
   expect(gameScore).toEqual(17);
 });
+
+it("should display the current frame number", () => {
+  const state = {
+    currentFrame: 4,
+    frameScores: [[5, 2], [3, 4], [1, 2], []],
+    totalScore: 17
+  };
+
+  const wrapper = shallow(<ScoreBoard {...state} />);
+  const currentFrame = wrapper.find('.currentFrame').props().children[1];
+
+  expect(currentFrame).toEqual(4);
+});

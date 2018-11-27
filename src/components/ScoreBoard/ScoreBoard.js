@@ -6,6 +6,7 @@ const ScoreBoard = (props) => {
   const {currentFrame, frameScores, totalScore} = props
   return (
     <div className="scoreboard">
+      <div className="currentFrame">Current Frame: {currentFrame}</div>
       <div className="frames">{renderFrames(frameScores)}</div>
       <h1 id="gameScore">Game Score = {totalScore}</h1>
     </div>
