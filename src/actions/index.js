@@ -4,3 +4,8 @@ export const addScore = number => ({
     score: number
   }
 });
+
+export const resetGame = () => ({
+  type: 'RESET_GAME',
+  payload: {}
+});
