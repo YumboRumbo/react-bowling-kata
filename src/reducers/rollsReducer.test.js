@@ -163,4 +163,50 @@ describe('rollsReducer', () => {
 
     expect(actualState).toEqual(expectedState);
   });
+
+  it('should be able to reset game that is in progress', () => {
+    const currentState = {
+      currentFrame: 6,
+      frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5]],
+      totalScore: 78,
+      gameOver: false
+    };
+    const action = {
+      type: 'RESET_GAME',
+      payload: {}
+    };
+    const expectedState = {
+      currentFrame: 1,
+      frameScores: [[]],
+      totalScore: 0,
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
+
+  it('should be able to reset game that is done', () => {
+    const currentState = {
+      currentFrame: 10,
+      frameScores: [[8, 2], [5, 4], [9, 0], [10], [10], [5, 5], [5, 3], [6, 3], [9, 1], [9, 1, 10]],
+      totalScore: 149,
+      gameOver: true
+    };
+    const action = {
+      type: 'RESET_GAME',
+      payload: {}
+    };
+    const expectedState = {
+      currentFrame: 1,
+      frameScores: [[]],
+      totalScore: 0,
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
 });

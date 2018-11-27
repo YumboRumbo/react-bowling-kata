@@ -9,6 +9,8 @@ const rollsReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'ADD_SCORE':
       return addScore(state, action.payload.score);
+    case 'RESET_GAME':
+      return initialState;
     default:
       return state;
   }
