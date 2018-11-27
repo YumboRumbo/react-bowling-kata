@@ -4,6 +4,7 @@ import Frame from "../Frame/Frame";
 const ScoreBoard = (props) => {
   console.log('props for ScoreBoard', props)
   const {currentFrame, frameScores, totalScore} = props
+  // TODO: Current frame css is wack, find out how to fix it.
   return (
     <div className="scoreboard">
       <div className="currentFrame">Current Frame: {currentFrame}</div>
