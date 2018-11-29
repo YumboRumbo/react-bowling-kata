@@ -51,3 +51,13 @@ it('should display blank if rolls array is undefined', () => {
   expect(secondRoll).toEqual('');
   expect(totalScore).toEqual('');
 });
+
+it('should display spares as /', () => {
+  const rolls = [8, 2];
+  const wrapper = shallow(<Frame rolls={rolls} />);
+  const firstRoll = wrapper.find('#firstRoll').props().children;
+  const secondRoll = wrapper.find('#secondRoll').props().children;
+
+  expect(firstRoll).toEqual(8);
+  expect(secondRoll).toEqual('/');
+});

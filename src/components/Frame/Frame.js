@@ -2,9 +2,13 @@ import React from "react";
 import { get } from 'lodash';
 
 const Frame = (props) => {
-  const firstRoll = get(props, 'rolls[0]', '');
-  const secondRoll = get(props, 'rolls[1]', '');
-  const rolls = get(props, 'rolls', []);
+  var firstRoll = get(props, 'rolls[0]', '');
+  var secondRoll = get(props, 'rolls[1]', '');
+  var rolls = get(props, 'rolls', []);
+
+  if (rolls.length === 2 && (firstRoll + secondRoll) === 10) {
+    secondRoll = '/';
+  }
 
   return (
     <div className="frame">
