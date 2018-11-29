@@ -24,6 +24,9 @@ const addScore = (state, score) => {
   } else if (frameIsEmpty(newState.frameScores[frameIndex])) {
     newState.frameScores[frameIndex].push(score);
   } else {
+    if (!isValidScoreInput(newState.frameScores[frameIndex], score)) {
+      return newState;
+    }
     completeFrame(newState, frameIndex, score);
   }
   newState.totalScore = parseInt(calculateTotalScore(newState.frameScores), 10);
@@ -42,6 +45,13 @@ const calculateTotalScore = frameScores => {
 };
 
 // ----- 'addScore' HELPER FUNCTIONS -----
+const isValidScoreInput = (frame, score) => {
+  return (
+    frame.length === 0 ||
+    (frame.length === 1 && (getFrameSum(frame) + score) <= 10)
+  );
+};
+
 const completeFrame = (newState, frameIndex, score) => {
   newState.frameScores[frameIndex].push(score);
   newState.frameScores.push([]);

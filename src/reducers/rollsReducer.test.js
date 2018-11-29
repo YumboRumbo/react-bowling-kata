@@ -209,4 +209,29 @@ describe('rollsReducer', () => {
 
     expect(actualState).toEqual(expectedState);
   });
+
+  it('should restrict impossible scores', () => {
+    const currentState = {
+      currentFrame: 2,
+      frameScores: [[2, 2], [5]],
+      totalScore: 9,
+      gameOver: false
+    };
+    const action = {
+      type: 'ADD_SCORE',
+      payload: {
+        score: 7
+      }
+    };
+    const expectedState = {
+      currentFrame: 2,
+      frameScores: [[2, 2], [5]],
+      totalScore: 9,
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
 });
