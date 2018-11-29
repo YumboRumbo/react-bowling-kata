@@ -8,7 +8,6 @@ import RollButtons from "../../components/RollButtons/RollButtons";
 
 class App extends Component {
   render() {
-    console.log('this.props', this.props)
     const { handleRoll, handleResetGame, ...rest } = this.props
 
     return (
@@ -30,10 +29,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('state for mapStateToProps', state);
-  return state;
-};
+const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   handleRoll: score => dispatch(addScore(score)),
   handleResetGame: () => dispatch(resetGame())

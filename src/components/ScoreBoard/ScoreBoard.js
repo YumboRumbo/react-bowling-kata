@@ -2,7 +2,6 @@ import React from "react";
 import Frame from "../Frame/Frame";
 
 const ScoreBoard = (props) => {
-  console.log('props for ScoreBoard', props)
   const {currentFrame, frameScores, totalScore} = props
   // TODO: Current frame css is wack, find out how to fix it.
   return (
