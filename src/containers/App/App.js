@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import logo from "../../logo.svg";
 import "./App.css";
 import { addScore, resetGame } from '../../actions/index';
-import ScoreBoard from "../ScoreBoard/ScoreBoard";
-import RollButtons from "../RollButtons/RollButtons";
+import ScoreBoard from '../../components/ScoreBoard/ScoreBoard';
+import RollButtons from "../../components/RollButtons/RollButtons";
 
 class App extends Component {
   render() {
