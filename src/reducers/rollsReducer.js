@@ -38,6 +38,10 @@ const addScore = (state, score) => {
   } else if (isValidScoreInput(frame, score)) {
     if (frameIsNew(frame)) {
       newState.rollScores[frameIndex].push(score);
+      if (score === 10) {
+        newState.rollScores.push([]);
+        newState.currentFrame++;
+      }
     } else if (frameIsInProgress(frame)) {
       newState.rollScores[frameIndex].push(score);
       newState.rollScores.push([]);
@@ -69,6 +73,7 @@ const getFrameScores = rollScores => {
     }
   }
   if (rollScores[9] !== undefined) {
+    // TODO: fix this so that it only calculates when last frame is complete
     totalScore += sum(rollScores[9]);
     frameScores.push(totalScore);
   }
@@ -100,8 +105,10 @@ const getFrameScore = (frame, nextFrame, nextNextFrame) => {
     } else if (frameIsStrike(frame)) {
       if (frameIsOpen(nextFrame) || frameIsSpare(nextFrame)) {
         return sum(frame) + sum(nextFrame);
-      } else if (frameIsStrike(nextFrame) && nextNextFrame[0] !== undefined) {
-        return sum(frame) + sum(nextFrame) + nextNextFrame[0];
+      } else if (frameIsStrike(nextFrame) && nextNextFrame !== undefined) {
+        if (nextNextFrame[0] !== undefined) {
+          return sum(frame) + sum(nextFrame) + nextNextFrame[0];
+        }
       }
     }
   }

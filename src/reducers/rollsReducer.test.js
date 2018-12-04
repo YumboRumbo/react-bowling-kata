@@ -234,4 +234,54 @@ describe('rollsReducer', () => {
 
     expect(actualState).toEqual(expectedState);
   });
+
+  it('should not calculate spare frame score until possible', () => {
+    const currentState = {
+      currentFrame: 3,
+      rollScores: [[5, 4], [9, 1], []],
+      frameScores: [9],
+      gameOver: false
+    };
+    const action = {
+      type: 'ADD_SCORE',
+      payload: {
+        score: 5
+      }
+    };
+    const expectedState = {
+      currentFrame: 3,
+      rollScores: [[5, 4], [9, 1], [5]],
+      frameScores: [9, 24],
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
+
+  it('should not calculate strike frame score until possible', () => {
+    const currentState = {
+      currentFrame: 3,
+      rollScores: [[10], [10], []],
+      frameScores: [],
+      gameOver: false
+    };
+    const action = {
+      type: 'ADD_SCORE',
+      payload: {
+        score: 10
+      }
+    };
+    const expectedState = {
+      currentFrame: 4,
+      rollScores: [[10], [10], [10], []],
+      frameScores: [30],
+      gameOver: false
+    };
+
+    const actualState = rollsReducer(currentState, action);
+
+    expect(actualState).toEqual(expectedState);
+  });
 });
