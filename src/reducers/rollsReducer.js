@@ -141,12 +141,6 @@ const frameIsStrike = frame => (
   frame.length === 1 && frame[0] === 10
 );
 
-const canScoreStrike = (firstFrame, secondFrame) => {
-  if (frameIsSpare(firstFrame)) {
-    
-  }
-};
-
 const sum = array => array.reduce(add, 0);
 
 const add = (a, b) => a + b;

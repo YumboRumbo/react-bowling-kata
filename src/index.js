@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './index.css';
-import App from './components/App/App';
+import App from './containers/App/App';
 import rollsReducer from './reducers/rollsReducer';
 import registerServiceWorker from './registerServiceWorker';
 
 const initialState = {
   currentFrame: 1,
-  frameScores: [[]],
-  totalScore: 0,
+  rollScores: [[]],
+  frameScores: [],
   gameOver: false
 };
 const store = createStore(rollsReducer, initialState);
