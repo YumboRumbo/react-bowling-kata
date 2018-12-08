@@ -10,7 +10,12 @@ const rollsReducer = (state = initialState, action) => {
     case 'ADD_SCORE':
       return addScore(state, action.payload.score);
     case 'RESET_GAME':
-      return initialState;
+      return {
+        currentFrame: 1,
+        rollScores: [[]],
+        frameScores: [],
+        gameOver: false
+      };
     default:
       return state;
   }
