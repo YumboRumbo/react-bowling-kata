@@ -49,3 +49,13 @@ it('should display spares as /', () => {
   expect(firstRoll).toEqual(8);
   expect(secondRoll).toEqual('/');
 });
+
+it('should display strikes as X', () => {
+  const rolls = [10];
+  const wrapper = shallow(<Frame rolls={rolls} />);
+  const firstRoll = wrapper.find('#firstRoll').props().children;
+  const secondRoll = wrapper.find('#secondRoll').props().children;
+
+  expect(firstRoll).toEqual('');
+  expect(secondRoll).toEqual('X');
+});

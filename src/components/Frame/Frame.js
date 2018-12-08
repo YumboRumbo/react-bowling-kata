@@ -10,7 +10,8 @@ const Frame = (props) => {
   if (rolls.length === 2 && (firstRoll + secondRoll) === 10) {
     secondRoll = '/';
   } else if (rolls.length === 1 && firstRoll === 10) {
-    firstRoll = 'X';
+    firstRoll = '';
+    secondRoll = 'X';
   }
 
   return (
