@@ -7,7 +7,7 @@ const ScoreBoard = (props) => {
   // TODO: Current frame css is wack, find out how to fix it.
   return (
     <div className="scoreboard">
-      <div className="currentFrame">Current Frame: {currentFrame}</div>
+      <div id="currentFrame">Current Frame: {currentFrame}</div>
       <div className="frames">{renderFrames(rollScores, frameScores)}</div>
     </div>
   );

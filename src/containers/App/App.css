@@ -46,6 +46,12 @@
   color: white;
 }
 
+.scoreboard #currentFrame {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
 .frames {
   margin-top: 30px;
   display: flex;
@@ -96,6 +102,52 @@
 }
 
 .frame p {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  padding-bottom: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 26px;
+}
+
+.lastFrame {
+  position: relative;
+  border: 1px solid black;
+  margin-right: 1px;
+  width: 75px;
+  height: 70px;
+  background-color: #333;
+  color: white;
+}
+
+.lastFrame span {
+  padding: 4px 6px 4px 6px;
+  font-size: 18px;
+  float: left;
+  display:inline-block;
+}
+
+.lastFrame span.spare {
+  margin: 3px;
+  display: inline-block;
+  float: right;
+  border-right: 20px solid darkturquoise;
+  border-top: 20px solid #333;
+  padding: 0;
+}
+
+.lastFrame span.strike {
+  margin: 3px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  float: right;
+  background-color: darkturquoise;
+  padding: 0;
+}
+
+.lastFrame p {
   position: absolute;
   bottom: 0;
   margin: 0;
