@@ -1,5 +1,6 @@
 import React from "react";
 import Frame from "../Frame/Frame";
+import LastFrame from '../LastFrame/LastFrame'
 
 const ScoreBoard = (props) => {
   const {currentFrame, rollScores, frameScores} = props
@@ -14,14 +15,19 @@ const ScoreBoard = (props) => {
 
 const renderFrames = (rollScores, frameScores) => {
   const frames = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 9; i++) {
     frames.push(renderFrame(i, rollScores[i], frameScores[i]));
   }
+  frames.push(renderLastFrame(9, rollScores[9], frameScores[9]));
   return <React.Fragment>{frames}</React.Fragment>;
 };
 
 const renderFrame = (index, rolls, frameScore) => (
-  <Frame key={index} rolls={rolls} frameScore={frameScore}/>
+  <Frame key={index} rolls={rolls} frameScore={frameScore} />
+);
+
+const renderLastFrame = (index, rolls, frameScore) => (
+  <LastFrame key={index} rolls={rolls} frameScore={frameScore} />
 );
 
 export default ScoreBoard;

@@ -35,5 +35,5 @@ const mapDispatchToProps = dispatch => ({
   handleResetGame: () => dispatch(resetGame())
 });
 
-export { App }
+export { App, mapStateToProps, mapDispatchToProps }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
