@@ -65,3 +65,5 @@ it('ScoreBoard should render ten Frame components', () => {
   expect(wrapper.find(Frame).length).toEqual(10);
 });
 ```
+
+I am a better coder than Dad.
