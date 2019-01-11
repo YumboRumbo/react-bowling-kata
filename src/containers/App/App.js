@@ -18,6 +18,12 @@ class App extends Component {
         </div>
         <div className="gameActions">
           <button
+            id="loadGame"
+            type="button"
+          >
+            Load Game
+          </button>
+          <button
             id="saveGame"
             type="button"
           >
