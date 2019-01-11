@@ -16,6 +16,20 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React Bowling</h2>
         </div>
+        <div className="gameActions">
+          <button
+            id="saveGame"
+            type="button"
+          >
+            Save Game
+          </button>
+          <button
+            id="deleteGame"
+            type="button"
+          >
+            Delete Game
+          </button>
+        </div>
         <RollButtons handleRoll={handleRoll} />
         <ScoreBoard {...rest} />
         <button
