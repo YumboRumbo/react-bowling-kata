@@ -6,6 +6,9 @@ import { addScore, resetGame } from '../../actions/index';
 import ScoreBoard from '../../components/ScoreBoard/ScoreBoard';
 import RollButtons from "../../components/RollButtons/RollButtons";
 
+import { GET_GAME, GET_GAMES } from "../../graphql/queries";
+import { CREATE_GAME, DELETE_GAME } from "../../graphql/mutations";
+
 class App extends Component {
   render() {
     const { handleRoll, handleResetGame, ...rest } = this.props;
